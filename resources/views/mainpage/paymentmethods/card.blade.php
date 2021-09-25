@@ -1,0 +1,2 @@
+CARD    
+{{ dd($data) }}
