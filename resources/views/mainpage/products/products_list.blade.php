@@ -302,11 +302,11 @@
                                 <h3 class="name">
                                   <a href="{{ route('main.product.details',$product->product_slug_en) }}">
                                     @if (session()->get('language')=='rus')
-                                      {{ $product->product_name_ph }}
+                                      {{ Illuminate\Support\Str::limit($product->product_name_ph,50) }}
                                     @elseif (session()->get('language')=='eng')
-                                      {{ $product->product_name_en }}
+                                      {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
                                     @else  
-                                      {{ $product->product_name_en }}
+                                      {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
                                     @endif
                                   </a>
                                 </h3>
@@ -373,11 +373,11 @@
                               <h3 class="name">
                                 <a href="{{ route('main.product.details',$product->product_slug_en) }}">
                                   @if (session()->get('language')=='rus')
-                                    {{ $product->product_name_ph }}
+                                    {{ Illuminate\Support\Str::limit($product->product_name_ph,50) }}
                                   @elseif (session()->get('language')=='eng')
-                                    {{ $product->product_name_en }}
+                                    {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
                                   @else  
-                                    {{ $product->product_name_en }}
+                                    {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
                                   @endif
                                 </a>
                               </h3>
