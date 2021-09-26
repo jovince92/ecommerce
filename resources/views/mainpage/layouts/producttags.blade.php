@@ -61,10 +61,10 @@
                         $newurl=$url.$array_tag_ru_unique.",";
                         if(in_array($array_tag_ru_unique,$url_params)){
                             $newurl=str_replace($array_tag_ru_unique,"",$newurl);
-                            $newurl=str_replace(",,",",",$newurl);
+                            $newurl=preg_replace("/,,+/",",",$newurl);                            
                         }
                     @endphp      
-                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_ru_unique }}" href="{{ $newurl }}">{{ $array_tag_ru_unique }}</a>                                 
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_ru_unique }}" href="{{ str_replace(",,",",",$newurl); }}">{{ $array_tag_ru_unique }}</a>                                 
                 @endforeach
             @elseif (session()->get('language')=='eng')
                 @foreach ($array_tags_en_unique as $array_tag_en_unique)
@@ -72,10 +72,10 @@
                         $newurl=$url.$array_tag_en_unique.",";
                         if(in_array($array_tag_en_unique,$url_params)){
                             $newurl=str_replace($array_tag_en_unique,"",$newurl);
-                            $newurl=str_replace(",,",",",$newurl);
+                            $newurl=preg_replace("/,,+/",",",$newurl);                            
                         }
                     @endphp
-                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ $newurl }}">{{ $array_tag_en_unique }}</a>                                 
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ str_replace(",,",",",$newurl); }}">{{ $array_tag_en_unique }}</a>                                 
                 @endforeach
             @else  
                 @foreach ($array_tags_en_unique as $array_tag_en_unique)  
@@ -83,10 +83,10 @@
                         $newurl=$url.$array_tag_en_unique.",";
                         if(in_array($array_tag_en_unique,$url_params)){
                             $newurl=str_replace($array_tag_en_unique,"",$newurl);
-                            $newurl=str_replace(",,",",",$newurl);
+                            $newurl=preg_replace("/,,+/",",",$newurl);                            
                         }
                     @endphp            
-                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ $newurl }}">{{ $array_tag_en_unique }}</a>                                 
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ str_replace(",,",",",$newurl); }}">{{ $array_tag_en_unique }}</a>                                 
                 @endforeach
             @endif 
         </div>

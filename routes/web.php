@@ -316,7 +316,9 @@ Route::post('/review',[ReviewController::class,'create'])->name('review.create')
 //VIEW , ROUTE, and Method TESTING
 Route::get('/testtest', function () {
 
-    return 0;
+    $str="a,,b";
+    $str2=str_replace(",,",",",$str);
+    return $str." ".$str2;
     /*
         \Illuminate\Support\Facades\Cache::flush();
     */
