@@ -29,7 +29,7 @@ class HomeController extends Controller
         $blogposts = BlogPost::orderBy('created_at','DESC')->get();
             
         $sliders = Slider::where('status',1)->limit(4)->get();
-        $products = Product::with('category')->where('product_status',1)->latest()->get();
+        $products = Product::with('category','review')->where('product_status',1)->latest()->get();
         return view('mainpage.index',compact('categories','sliders','products','blogposts'));
     }
 
@@ -91,7 +91,7 @@ class HomeController extends Controller
 
     public function productsSubSubCategorized($subsubslug){
         $subsubcategory=SubSubCategory::with(['category','subcategory'])->where('subsubcategory_slug_en',$subsubslug)->firstOrFail();
-        $products = Product::where('subsubcategory_id',$subsubcategory->id)->where('product_status',1)->orderBy('product_name_en')->get();
+        $products = Product::with('review')->where('subsubcategory_id',$subsubcategory->id)->where('product_status',1)->orderBy('product_name_en')->get();
         $title['en'] = $subsubcategory->subsubcategory_name_en;
         $title['ru'] = $subsubcategory->subsubcategory_name_ph;
 
@@ -117,7 +117,7 @@ class HomeController extends Controller
 
     public function productsSubCategorized($subslug){
         $subcategory=SubCategory::with('category')->where('subcategory_slug_en',$subslug)->firstOrFail();
-        $products = Product::where('subcategory_id',$subcategory->id)->where('product_status',1)->orderBy('product_name_en')->get();
+        $products = Product::with('review')->where('subcategory_id',$subcategory->id)->where('product_status',1)->orderBy('product_name_en')->get();
         $title['en'] = $subcategory->subcategory_name_en;
         $title['ru'] = $subcategory->subcategory_name_ph;
 
@@ -139,7 +139,7 @@ class HomeController extends Controller
     public function productsCategorized($catslug){
         $category=Category::where('category_slug_en',$catslug)->firstOrFail();
         
-        $products = Product::where('category_id',$category->id)->where('product_status',1)->orderBy('product_name_en')->get();
+        $products = Product::with('review')->where('category_id',$category->id)->where('product_status',1)->orderBy('product_name_en')->get();
         $title['en'] = $category->category_name_en;
         $title['ru'] = $category->category_name_ph;
 
@@ -152,7 +152,7 @@ class HomeController extends Controller
     }
 
     public function productsCart($slug){
-        $product = Product::with(['category','brand'])->where('product_slug_en',$slug)->first();
+        $product = Product::with(['category','brand','review'])->where('product_slug_en',$slug)->first();
         return json_encode(compact('product'));
     }
 
@@ -248,7 +248,7 @@ class HomeController extends Controller
 
         $slug = $request->search;
 
-        $products = Product::where('product_name_en','LIKE','%'.$slug.'%')->orderBy('product_name_en')->get();
+        $products = Product::with('review')->where('product_name_en','LIKE','%'.$slug.'%')->orderBy('product_name_en')->get();
         
         $title['en'] = 'Search for '.$slug;
         $title['ru'] = 'Искать '.$slug;

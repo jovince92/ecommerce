@@ -41,7 +41,49 @@
                                     @endif
                                   </a>
                                 </h3>
-                                <div class="rating rateit-small"></div>
+                                <div class="">
+                                  @if (($product->review->avg('rating')>=0.5)&&($product->review->avg('rating')<0.9))
+                                    <span class="fa fa-star-half-o starred fa-lg"></span>
+                                  @elseif ($product->review->avg('rating')>=1)
+                                    <span class="fa fa-star starred fa-lg"></span>
+                                  @else 
+                                    <span class="fa fa-star-o starred fa-lg"></span>
+                                  @endif
+  
+  
+                                  @if (($product->review->avg('rating')>=1.5)&&($product->review->avg('rating')<1.9))
+                                    <span class="fa fa-star-half-o starred fa-lg"></span>
+                                  @elseif ($product->review->avg('rating')>=2)
+                                    <span class="fa fa-star starred fa-lg"></span>
+                                  @else 
+                                    <span class="fa fa-star-o starred fa-lg"></span>
+                                  @endif
+  
+                                  @if (($product->review->avg('rating')>=2.5)&&($product->review->avg('rating')<2.9))
+                                    <span class="fa fa-star-half-o starred fa-lg"></span>
+                                  @elseif ($product->review->avg('rating')>=3)
+                                    <span class="fa fa-star starred fa-lg"></span>
+                                  @else 
+                                    <span class="fa fa-star-o starred fa-lg"></span>
+                                  @endif
+  
+                                  @if (($product->review->avg('rating')>=3.5)&&($product->review->avg('rating')<3.9))
+                                    <span class="fa fa-star-half-o starred fa-lg"></span>
+                                  @elseif ($product->review->avg('rating')>=4)
+                                    <span class="fa fa-star starred fa-lg"></span>
+                                  @else 
+                                    <span class="fa fa-star-o starred fa-lg"></span>
+                                  @endif
+  
+                                  @if (($product->review->avg('rating')>=4.5)&&($product->review->avg('rating')<4.9))
+                                    <span class="fa fa-star-half-o starred fa-lg"></span>
+                                  @elseif ($product->review->avg('rating')==5)
+                                    <span class="fa fa-star starred fa-lg"></span>
+                                  @else 
+                                    <span class="fa fa-star-o starred fa-lg"></span>
+                                  @endif
+                                  <br>{{ $product->review->count() }} Total Review/s <br> {{ 0+round($product->review->avg('rating',2)) }} Star Average Rating
+                                </div>
                                 <div class="product-price"> 
                                   <span class="price">{{ ($product->product_discount != NULL)?'$'. ($product->product_prize)-($product->product_prize* ($product->product_discount*0.010 )) :'$'.$product->product_prize }}</span>                                 
                                   <span class="price-before-discount">{{ ($product->product_discount != NULL)?'$'.$product->product_prize:'' }}</span> 
