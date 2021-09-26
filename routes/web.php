@@ -294,6 +294,7 @@ Route::get('/ordertracking/',[HomeController::class,'ordertracking'])->middlewar
 Route::get('/search/',[HomeController::class,'search'])->name('search.all');
 Route::get('/search/brands/{slug}',[HomeController::class,'brands'])->name('brands.search');
 Route::post('/search_product/',[HomeController::class,'search_ajax'])->name('search.ajax');
+Route::get('/search/tags/',[HomeController::class,'tags'])->name('search.tags');
 
 
 Route::post('/review',[ReviewController::class,'create'])->name('review.create');
@@ -315,7 +316,7 @@ Route::post('/review',[ReviewController::class,'create'])->name('review.create')
 //VIEW , ROUTE, and Method TESTING
 Route::get('/testtest', function () {
 
-    return public_path('storage/profile-photos/admin/default.jpg');
+    return 0;
     /*
         \Illuminate\Support\Facades\Cache::flush();
     */

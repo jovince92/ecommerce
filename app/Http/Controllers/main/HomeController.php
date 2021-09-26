@@ -3,21 +3,24 @@
 namespace App\Http\Controllers\main;
 
 use App\Models\User;
+use App\Models\Brand;
+use App\Models\Order;
+use App\Models\Review;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\MultiImg;
+use App\Models\OrderDetail;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
-use App\Models\Brand;
-use App\Models\Order;
-use App\Models\OrderDetail;
-use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class HomeController extends Controller
 {
@@ -302,5 +305,38 @@ class HomeController extends Controller
         return view('mainpage.products.products_list',compact('products','title','b1'));
         
 
+    }
+
+    public function tags(Request $request){
+        
+        
+
+        $array_en=[];
+        foreach (explode(",",$request->tags) as $product_tag_en) {
+            array_push($array_en,trim($product_tag_en));
+        }
+        
+        $str=array_unique($array_en);
+
+        
+        $products=new Collection();
+        foreach($str as $slug){
+            if(strlen($slug)>1){
+                $result = Product::with('review')->where('product_tags_en','LIKE','%'.$slug.'%')->orderBy('product_name_en')->get();
+                $products= $products->merge($result);
+            }
+            
+        }
+
+        $title['en'] = 'TAGS '.$request->tags;
+        $title['ru'] = 'ТЕГИ '.$request->tags;
+
+        $b1=([
+            'en'=>'TAGS: '.$request->tags,
+            'ru'=>'ТЕГИ '.$request->tags
+        ]);
+
+        return view('mainpage.products.products_list',compact('products','title','b1'));
+        
     }
 }

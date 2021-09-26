@@ -38,17 +38,55 @@
     </h3>
     <div class="sidebar-widget-body outer-top-xs">
         <div class="tag-list">
+            
+            @php
+                $url = route('search.tags'). "?tags=";
+                $query=[];
+                $url_params=[];
+                
+                if (Route::current()->getName()=='search.tags'){
+                    $url =    Request::fullUrl();
+                    $query=Request::query();
+                
+                    $url_params= explode(",",$query['tags']);
+                }
+                
+                
+                
+            @endphp
+
             @if (session()->get('language')=='rus')
-                @foreach ($array_tags_ru_unique as $array_tag_ru_unique)              
-                    <a class="item active" title="{{ $array_tag_ru_unique }}" href="">{{ $array_tag_ru_unique }}</a>                                 
+                @foreach ($array_tags_ru_unique as $array_tag_ru_unique)
+                    @php
+                        $newurl=$url.$array_tag_ru_unique.",";
+                        if(in_array($array_tag_ru_unique,$url_params)){
+                            $newurl=str_replace($array_tag_ru_unique,"",$newurl);
+                            $newurl=str_replace(",,",",",$newurl);
+                        }
+                    @endphp      
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_ru_unique }}" href="{{ $newurl }}">{{ $array_tag_ru_unique }}</a>                                 
                 @endforeach
             @elseif (session()->get('language')=='eng')
-                @foreach ($array_tags_en_unique as $array_tag_en_unique)              
-                    <a class="item active" title="{{ $array_tag_en_unique }}" href="">{{ $array_tag_en_unique }}</a>                                 
+                @foreach ($array_tags_en_unique as $array_tag_en_unique)
+                    @php
+                        $newurl=$url.$array_tag_en_unique.",";
+                        if(in_array($array_tag_en_unique,$url_params)){
+                            $newurl=str_replace($array_tag_en_unique,"",$newurl);
+                            $newurl=str_replace(",,",",",$newurl);
+                        }
+                    @endphp
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ $newurl }}">{{ $array_tag_en_unique }}</a>                                 
                 @endforeach
             @else  
-                @foreach ($array_tags_en_unique as $array_tag_en_unique)              
-                    <a class="item active" title="{{ $array_tag_en_unique }}" href="">{{ $array_tag_en_unique }}</a>                                 
+                @foreach ($array_tags_en_unique as $array_tag_en_unique)  
+                    @php
+                        $newurl=$url.$array_tag_en_unique.",";
+                        if(in_array($array_tag_en_unique,$url_params)){
+                            $newurl=str_replace($array_tag_en_unique,"",$newurl);
+                            $newurl=str_replace(",,",",",$newurl);
+                        }
+                    @endphp            
+                    <a class="item {{ (in_array($array_tag_en_unique,$url_params))?'active':'' }}" title="{{ $array_tag_en_unique }}" href="{{ $newurl }}">{{ $array_tag_en_unique }}</a>                                 
                 @endforeach
             @endif 
         </div>
