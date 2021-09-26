@@ -147,24 +147,10 @@
         </div><!-- /.container -->
         
     </div><!-- /.body-content -->
-    
-
-    
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <script>
+<script>
         $(document).ready(function(){
             myCartPage();
             couponApplied();

@@ -55,6 +55,7 @@ class CartController extends Controller
         else{
             $price=$product->product_prize;
         }
+        $price=round($price,2);
         //Cart::destroy();
         Cart::add([
             "id"=>$request->productcode,
@@ -115,7 +116,8 @@ class CartController extends Controller
             }else{
                 
                 $total = 0.00;
-                $total = floatval(Cart::subtotalfloat());
+                $total = round(floatval(Cart::subtotalfloat()),2);
+
                 Cart::setGlobalDiscount($coupon->coupon_discount);
                 Session::put('coupon',[
                     'coupon_name'=>$coupon->coupon_name,
@@ -132,6 +134,7 @@ class CartController extends Controller
         
         
         $total = floatval(Cart::subtotalfloat());        
+        $total = round($total,2);
         $totalBeforeDiscount = floatval(Cart::subtotalfloat());   
         $initialtotal = floatval(Cart::initialfloat());   
         $yousave=(Cart::discount());
