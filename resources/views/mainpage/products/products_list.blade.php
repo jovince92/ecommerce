@@ -210,9 +210,10 @@
           <div class="row">
             <div class="col col-sm-6 col-md-2">
               <div class="filter-tabs">
-                <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
-                  <li class="active"> <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid</a> </li>
-                  <li><a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a></li>
+                <span class="text-danger">{{ $products->count() }} Total {{ Illuminate\Support\Str::plural('Product',$products->count() ) }}</span>
+                <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">                  
+                  <li  class="active"><a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a></li>
+                  <li> <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid</a> </li>                  
                 </ul>
               </div>
               <!-- /.filter-tabs --> 
@@ -220,7 +221,7 @@
             <!-- /.col -->
             <div class="col col-sm-12 col-md-6">
               <div class="col col-sm-3 col-md-6 no-padding">
-                <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                {{-- <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                   <div class="fld inline">
                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                       <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
@@ -233,12 +234,12 @@
                     </div>
                   </div>
                   <!-- /.fld --> 
-                </div>
+                </div> --}}
                 <!-- /.lbl-cnt --> 
               </div>
               <!-- /.col -->
               <div class="col col-sm-3 col-md-6 no-padding">
-                <div class="lbl-cnt"> <span class="lbl">Show</span>
+                {{-- <div class="lbl-cnt"> <span class="lbl">Show</span>
                   <div class="fld inline">
                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                       <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
@@ -257,13 +258,13 @@
                     </div>
                   </div>
                   <!-- /.fld --> 
-                </div>
+                </div> --}}
                 <!-- /.lbl-cnt --> 
               </div>
               <!-- /.col --> 
             </div>
             <!-- /.col -->
-            <div class="col col-sm-6 col-md-4 text-right">
+            {{-- <div class="col col-sm-6 col-md-4 text-right">
               <div class="pagination-container">
                 <ul class="list-inline list-unstyled">
                   <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -275,252 +276,31 @@
                 </ul>
                 <!-- /.list-inline --> 
               </div>
-              <!-- /.pagination-container --> </div>
+              <!-- /.pagination-container --> 
+            </div> --}}
             <!-- /.col --> 
           </div>
           <!-- /.row --> 
         </div>
         <div class="search-result-container ">
           <div id="myTabContent" class="tab-content category-list">
-            <div class="tab-pane active " id="grid-container">
-              <div class="category-product">
-                <div class="row">
-                    <!-- /.single PRODUCTTS -->
-                    @foreach ($products as $product)
-                      <div class="col-sm-6 col-md-4 wow fadeInUp">
-                        <div class="products">
-                            <div class="product">
-                            <div class="product-image">
-                                <div class="image"> <a href="{{ route('main.product.details',$product->product_slug_en) }}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
-                                <!-- /.image -->
-                                
-                                <div class="tag new"><span>new</span></div>
-                            </div>
-                            <!-- /.product-image -->
-                            
-                            <div class="product-info text-left">
-                                <h3 class="name">
-                                  <a href="{{ route('main.product.details',$product->product_slug_en) }}">
-                                    @if (session()->get('language')=='rus')
-                                      {{ Illuminate\Support\Str::limit($product->product_name_ph,50) }}
-                                    @elseif (session()->get('language')=='eng')
-                                      {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
-                                    @else  
-                                      {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
-                                    @endif
-                                  </a>
-                                </h3>
-                                <div class="">
-                                  @if (($product->review->avg('rating')>=0.5)&&($product->review->avg('rating')<0.9))
-                                    <span class="fa fa-star-half-o starred fa-lg"></span>
-                                  @elseif ($product->review->avg('rating')>=1)
-                                    <span class="fa fa-star starred fa-lg"></span>
-                                  @else 
-                                    <span class="fa fa-star-o starred fa-lg"></span>
-                                  @endif
-  
-  
-                                  @if (($product->review->avg('rating')>=1.5)&&($product->review->avg('rating')<1.9))
-                                    <span class="fa fa-star-half-o starred fa-lg"></span>
-                                  @elseif ($product->review->avg('rating')>=2)
-                                    <span class="fa fa-star starred fa-lg"></span>
-                                  @else 
-                                    <span class="fa fa-star-o starred fa-lg"></span>
-                                  @endif
-  
-                                  @if (($product->review->avg('rating')>=2.5)&&($product->review->avg('rating')<2.9))
-                                    <span class="fa fa-star-half-o starred fa-lg"></span>
-                                  @elseif ($product->review->avg('rating')>=3)
-                                    <span class="fa fa-star starred fa-lg"></span>
-                                  @else 
-                                    <span class="fa fa-star-o starred fa-lg"></span>
-                                  @endif
-  
-                                  @if (($product->review->avg('rating')>=3.5)&&($product->review->avg('rating')<3.9))
-                                    <span class="fa fa-star-half-o starred fa-lg"></span>
-                                  @elseif ($product->review->avg('rating')>=4)
-                                    <span class="fa fa-star starred fa-lg"></span>
-                                  @else 
-                                    <span class="fa fa-star-o starred fa-lg"></span>
-                                  @endif
-  
-                                  @if (($product->review->avg('rating')>=4.5)&&($product->review->avg('rating')<4.9))
-                                    <span class="fa fa-star-half-o starred fa-lg"></span>
-                                  @elseif ($product->review->avg('rating')==5)
-                                    <span class="fa fa-star starred fa-lg"></span>
-                                  @else 
-                                    <span class="fa fa-star-o starred fa-lg"></span>
-                                  @endif
-                                  {{ $product->review->count() }} Total Review/s <br> {{ 0+round($product->review->avg('rating',2)) }} Star Average Rating
-                                </div>
-                                <div class="description"></div>
-                                <div class="product-price"> 
-                                  <span class="price">{{ ($product->product_discount != NULL)?'$'. ($product->product_prize)-($product->product_prize* ($product->product_discount*0.010 )) :'$'.$product->product_prize }}</span>                                 
-                                  <span class="price-before-discount">{{ ($product->product_discount != NULL)?'$'.$product->product_prize:'' }}</span> 
-                                </div>
-                                <!-- /.product-price --> 
-                                
-                            </div>
-                            <!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                <ul class="list-unstyled">
-                                    <li class="add-cart-button btn-group">
-                                      <button data-toggle="modal" data-target="#addtocart" class="btn btn-primary icon" type="button" title="Add Cart" id="{{ $product->product_slug_en}}" onclick="cart('{{ $product->product_slug_en }}')"> <i class="fa fa-shopping-cart"></i> </button>
-                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                    </li>                                    
-                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
-                                    <button class="btn btn-danger icon" title="Wishlist" data-productcode="{{ $product->product_code}}" id="addToWishlish" > <i class="icon fa fa-heart"></i> </button>                                    
-                                </ul>
-                                </div>
-                                <!-- /.action --> 
-                            </div>
-                            <!-- /.cart --> 
-                            </div>
-                            <!-- /.product --> 
-                            
-                        </div>
-                    <!-- /.products --> 
-                    </div>
-                      
-                    @endforeach
-                    
-                    <!-- /.single PRODUCTTS -->
-                  
-                  
-                </div>
-                <!-- /.row --> 
-              </div>
-              <!-- /.category-product --> 
-              
-            </div>
-            <!-- /.tab-pane -->
             
-            <div class="tab-pane "  id="list-container">
-              <div class="category-product">
-                
-                @foreach ($products as $product)
-                  
-                  <div class="category-product-inner wow fadeInUp">
-                    <div class="products">
-                      <div class="product-list product">
-                        <div class="row product-list-row">
-                          <div class="col col-sm-4 col-lg-4">
-                            <div class="product-image">
-                              <div class="image"> <img src="{{ asset($product->product_thumbnail) }}" alt=""> </div>
-                            </div>
-                            <!-- /.product-image --> 
-                          </div>
-                          <!-- /.col -->
-                          <div class="col col-sm-8 col-lg-8">
-                            <div class="product-info">
-                              <h3 class="name">
-                                <a href="{{ route('main.product.details',$product->product_slug_en) }}">
-                                  @if (session()->get('language')=='rus')
-                                    {{ Illuminate\Support\Str::limit($product->product_name_ph,50) }}
-                                  @elseif (session()->get('language')=='eng')
-                                    {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
-                                  @else  
-                                    {{ Illuminate\Support\Str::limit($product->product_name_en,50) }}
-                                  @endif
-                                </a>
-                              </h3>
-                              <div class="">
-                                @if (($product->review->avg('rating')>=0.5)&&($product->review->avg('rating')<0.9))
-                                  <span class="fa fa-star-half-o starred fa-lg"></span>
-                                @elseif ($product->review->avg('rating')>=1)
-                                  <span class="fa fa-star starred fa-lg"></span>
-                                @else 
-                                  <span class="fa fa-star-o starred fa-lg"></span>
-                                @endif
-
-
-                                @if (($product->review->avg('rating')>=1.5)&&($product->review->avg('rating')<1.9))
-                                  <span class="fa fa-star-half-o starred fa-lg"></span>
-                                @elseif ($product->review->avg('rating')>=2)
-                                  <span class="fa fa-star starred fa-lg"></span>
-                                @else 
-                                  <span class="fa fa-star-o starred fa-lg"></span>
-                                @endif
-
-                                @if (($product->review->avg('rating')>=2.5)&&($product->review->avg('rating')<2.9))
-                                  <span class="fa fa-star-half-o starred fa-lg"></span>
-                                @elseif ($product->review->avg('rating')>=3)
-                                  <span class="fa fa-star starred fa-lg"></span>
-                                @else 
-                                  <span class="fa fa-star-o starred fa-lg"></span>
-                                @endif
-
-                                @if (($product->review->avg('rating')>=3.5)&&($product->review->avg('rating')<3.9))
-                                  <span class="fa fa-star-half-o starred fa-lg"></span>
-                                @elseif ($product->review->avg('rating')>=4)
-                                  <span class="fa fa-star starred fa-lg"></span>
-                                @else 
-                                  <span class="fa fa-star-o starred fa-lg"></span>
-                                @endif
-
-                                @if (($product->review->avg('rating')>=4.5)&&($product->review->avg('rating')<4.9))
-                                  <span class="fa fa-star-half-o starred fa-lg"></span>
-                                @elseif ($product->review->avg('rating')==5)
-                                  <span class="fa fa-star starred fa-lg"></span>
-                                @else 
-                                  <span class="fa fa-star-o starred fa-lg"></span>
-                                @endif
-                                <br>{{ $product->review->count() }} Total Review/s <br> {{ 0+round($product->review->avg('rating',2)) }} Star Average Rating
-                              </div>
-                              <div class="product-price"> 
-                                <span class="price">{{ ($product->product_discount != NULL)?'$'. ($product->product_prize)-($product->product_prize* ($product->product_discount*0.010 )) :'$'.$product->product_prize }}</span>                                 
-                                <span class="price-before-discount">{{ ($product->product_discount != NULL)?'$'.$product->product_prize:'' }}</span> 
-                              </div>
-                              <!-- /.product-price -->
-                              <div class="description m-t-10">
-                                @if (session()->get('language')=='rus')
-                                    {{ $product->product_descp_short_ph }}
-                                  @elseif (session()->get('language')=='eng')
-                                    {{ $product->product_descp_short_en_en }}
-                                  @else  
-                                    {{ $product->product_descp_short_en_en }}
-                                  @endif
-                              </div>
-                              <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                  <ul class="list-unstyled">
-                                    <li class="add-cart-button btn-group">
-                                      <button data-toggle="modal" data-target="#addtocart" class="btn btn-primary icon" type="button" title="Add Cart" id="{{ $product->product_slug_en}}" onclick="cart('{{ $product->product_slug_en }}')"> <i class="fa fa-shopping-cart"></i> </button>
-                                      <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                    </li>                                    
-                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
-                                    <button class="btn btn-danger icon" title="Wishlist" data-productcode="{{ $product->product_code}}" id="addToWishlish" > <i class="icon fa fa-heart"></i> </button>                                    
-                                  </ul>
-                                </div>
-                                <!-- /.action --> 
-                              </div>
-                              <!-- /.cart --> 
-                              
-                            </div>
-                            <!-- /.product-info --> 
-                          </div>
-                          <!-- /.col --> 
-                        </div>
-                        <!-- /.product-list-row -->
-                        <div class="tag new"><span>new</span></div>
-                      </div>
-                      <!-- /.product-list --> 
-                    </div>
-                    <!-- /.products --> 
-                  </div>  
-                @endforeach
-                
-                <!-- /.category-product-inner -->                
-              </div>
-              <!-- /.category-product --> 
+            
+            <!-- /.tab-pane -->
+            <div class="tab-pane active " id="list-container">
+              @include('mainpage.products.listview')
             </div>
+
+            <div class="tab-pane "  id="grid-container">
+              @include('mainpage.products.gridview')            
+            </div>
+            
             <!-- /.tab-pane #list-container --> 
           </div>
           <!-- /.tab-content -->
           <div class="clearfix filters-container">
             <div class="text-right">
-              <div class="pagination-container">
+              {{-- <div class="pagination-container">
                 <ul class="list-inline list-unstyled">
                   <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                   <li><a href="#">1</a></li>
@@ -530,8 +310,9 @@
                   <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
                 </ul>
                 <!-- /.list-inline --> 
-              </div>
-              <!-- /.pagination-container --> </div>
+              </div> --}}
+              <!-- /.pagination-container --> 
+            </div>
             <!-- /.text-right --> 
             
           </div>
@@ -540,6 +321,10 @@
         </div>
         <!-- /.search-result-container --> 
         
+        <div class="ajaxloading text-center" style="display: none">
+          <img src="{{ asset('uploads/loading.svg') }}" alt="" style="width: 120px; height: 120px;">
+        </div>
+
       </div>
       <!-- /.col --> 
     </div>
@@ -558,9 +343,6 @@
 		color: orange;
 	}
 </style>
-
-
-
 
 
 

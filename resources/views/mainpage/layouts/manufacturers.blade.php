@@ -1,5 +1,5 @@
 @php
-    $brands=App\Models\Brand::orderBy('brand_name_en')->get();
+    $brands=App\Models\Brand::with('product')->has('product','>',0)->orderBy('brand_name_en')->get();
 @endphp
 <div class="sidebar-widget wow fadeInUp">
     <div class="widget-header">
@@ -17,7 +17,7 @@
         <ul class="list">
             @foreach ($brands as $brand)
             <li>
-                <a href="#">
+                <a href="{{ route('brands.search',$brand->brand_slug_en) }}">
                     @if (session()->get('language')=='rus')
                         {{ $brand->brand_name_ph }}
                     @elseif (session()->get('language')=='eng')

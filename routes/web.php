@@ -292,6 +292,7 @@ Route::prefix('wishlist')->group(function(){
 
 Route::get('/ordertracking/',[HomeController::class,'ordertracking'])->middleware(['user','auth'])->name('ordertracking.all');
 Route::get('/search/',[HomeController::class,'search'])->name('search.all');
+Route::get('/search/brands/{slug}',[HomeController::class,'brands'])->name('brands.search');
 Route::post('/search_product/',[HomeController::class,'search_ajax'])->name('search.ajax');
 
 

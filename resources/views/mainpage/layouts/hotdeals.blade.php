@@ -33,7 +33,7 @@
                 
               </div>
               <div class="timing-wrapper">
-                <div class="box-wrapper">
+                {{-- <div class="box-wrapper">
                   <div class="date box"> <span class="key">120</span> <span class="value">DAYS</span> </div>
                 </div>
                 <div class="box-wrapper">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="box-wrapper hidden-md">
                   <div class="seconds box"> <span class="key">60</span> <span class="value">SEC</span> </div>
-                </div>
+                </div> --}}
               </div>
             </div>
             <!-- /.hot-deal-wrapper -->

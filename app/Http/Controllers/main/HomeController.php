@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
+use App\Models\Brand;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Review;
@@ -258,6 +259,8 @@ class HomeController extends Controller
             'ru'=>'Искать '.$slug
         ]);
 
+        
+
         return view('mainpage.products.products_list',compact('products','title','b1'));
         
 
@@ -274,5 +277,30 @@ class HomeController extends Controller
 
         return view('mainpage.layouts.search_tooltip',compact('products'));
         //return json_encode($products);
+    }
+
+
+
+    public function brands($slug){
+
+        
+        $brand=Brand::where('brand_slug_en',$slug)->firstOrFail();
+        
+
+        $products = Product::with('review')->where('brand_id',$brand->id)->orderBy('product_name_en')->get();
+        
+        $title['en'] = 'Products By '.$brand->brand_name_en;
+        $title['ru'] = 'Продукция '.$brand->brand_name_ph;
+
+        $b1=([
+            'en'=>'Products By '.$brand->brand_name_en,
+            'ru'=>'Продукция '.$brand->brand_name_ph
+        ]);
+
+        
+
+        return view('mainpage.products.products_list',compact('products','title','b1'));
+        
+
     }
 }

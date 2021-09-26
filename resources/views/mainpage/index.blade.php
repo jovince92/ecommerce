@@ -114,7 +114,7 @@
                                   @else 
                                     <span class="fa fa-star-o starred fa-lg"></span>
                                   @endif
-                                  <br>{{ $product->review->count() }} Total Review/s <br> {{ 0+round($product->review->avg('rating',2)) }} Star Average Rating
+                                  <br>{{ $product->review->count() }} Total Review/s <br> {{ 0+round(($product->review->avg('rating',2))) }} Star Average Rating
                                 </div>
                                 <div class="product-price"> 
                                   <span class="price">{{ ($product->product_discount != NULL)?'$'. ($product->product_prize)-($product->product_prize* ($product->product_discount*0.010 )) :'$'.$product->product_prize }}</span>                                 
